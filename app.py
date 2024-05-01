@@ -12,7 +12,7 @@ def index():
 @app.route("/add", methods=["POST"])
 def add():
     todo = request.form['todo']
-    todo.append({"task": todo, "done": False})
+    todos.append({"task": todo, "done": False})
     return redirect(url_for("index"))
 
 @app.route("/edit/<int:index>", methods=["GET", "POST"])
@@ -20,7 +20,7 @@ def edit(index):
     todo = todos[index]
     if request.method == "POST":
         todo['task'] = request.form['todo']
-        redirect(url_for("index"))
+        return redirect(url_for("index"))
         
     else:
         return render_template("edit.html", todo= todo, index=index)
